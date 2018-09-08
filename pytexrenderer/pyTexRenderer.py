@@ -39,11 +39,12 @@ class RunGUI(QtWidgets.QMainWindow):
         # behaviors
         self.ui.renderButton.pressed.connect(self.renderButtonPressed)
 
-
     def dragEnterEvent(self, event):
         urls = event.mimeData().urls()
         path = urls[0].toLocalFile()
         if os.path.splitext(path)[1] == '.txt':
+            event.accept()
+        elif os.path.splitext(path)[1] == '.png':
             event.accept()
         else:
             event.ignore()
@@ -51,8 +52,23 @@ class RunGUI(QtWidgets.QMainWindow):
     def dropEvent(self, event):
         urls = event.mimeData().urls()
         path = urls[0].toLocalFile()
-        with open(path, 'r') as f:
+        if os.path.splitext(path)[1] == '.txt':
+            textpath = path
+        elif os.path.splitext(path)[1] == '.png':
+            tmp_textpath = os.path.splitext(path)[0] + '.txt'
+            if not os.path.exists(tmp_textpath):
+                QtWidgets.QMessageBox.warning(self, 'Notice', u'No matching text file')
+                return
+            else:
+                textpath = tmp_textpath
+        else:
+            QtWidgets.QMessageBox.warning(self, 'Notice', u'No matching text file')
+            return
+
+        with open(textpath, 'r') as f:
             self.input_tex_string = f.read()
+
+        self.ui.textEdit.setText(self.input_tex_string)
         self.getAndShowEquationImage()
 
     def renderButtonPressed(self):
