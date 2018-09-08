@@ -13,6 +13,7 @@ import urllib.parse
 import urllib.request
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from pdf2image import convert_from_path
 
 from gui import Ui_MainWindow
 
@@ -35,19 +36,13 @@ class RunGUI(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.ui.textEdit.setText(self.input_string)
         self.ui.renderingArea.setAlignment(QtCore.Qt.AlignCenter)
+        self.setTmpstring()
 
         # behaviors
         self.ui.renderButton.pressed.connect(self.renderButtonPressed)
 
     def dragEnterEvent(self, event):
-        urls = event.mimeData().urls()
-        path = urls[0].toLocalFile()
-        if os.path.splitext(path)[1] == '.txt':
-            event.accept()
-        elif os.path.splitext(path)[1] == '.png':
-            event.accept()
-        else:
-            event.ignore()
+        event.accept()
 
     def dropEvent(self, event):
         urls = event.mimeData().urls()
@@ -97,6 +92,7 @@ class RunGUI(QtWidgets.QMainWindow):
         cache_image_name = self.getEqImageFromCodecogs(self.input_tex_string)
         q_pixmap = QtGui.QPixmap(cache_image_name)
         self.ui.renderingArea.setPixmap(q_pixmap)
+        os.remove(cache_image_name)
 
     def getEqImageFromCodecogs(self, input_tex_string):
         ''' 
