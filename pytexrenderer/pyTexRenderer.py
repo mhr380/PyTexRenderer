@@ -32,6 +32,7 @@ class RunGUI(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.ui.textEdit.setText(self.input_string)
+        self.ui.renderingArea.setAlignment(QtCore.Qt.AlignCenter)
         self.getAndShowEquationImage()
 
         self.ui.renderButton.pressed.connect(self.getAndShowEquationImage)
