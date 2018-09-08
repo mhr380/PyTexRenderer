@@ -1,8 +1,9 @@
 /__pycache__/
 /.vscode/
-
 pytexrenderer/*.bat
-
 pytexrenderer/__pycache__/
 
 test.py
+
+cache/*.png
+cache/*.txt
