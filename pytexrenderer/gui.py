@@ -11,40 +11,48 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(794, 558)
+        MainWindow.resize(403, 480)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.textEdit = QtWidgets.QTextEdit(self.centralwidget)
-        self.textEdit.setGeometry(QtCore.QRect(50, 20, 681, 221))
+        self.textEdit.setGeometry(QtCore.QRect(20, 10, 341, 161))
         font = QtGui.QFont()
-        font.setFamily("Consolas")
+        font.setFamily("Meiryo UI")
         self.textEdit.setFont(font)
+        self.textEdit.setAcceptRichText(False)
         self.textEdit.setObjectName("textEdit")
-        self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
-        self.scrollArea.setGeometry(QtCore.QRect(50, 270, 681, 161))
-        self.scrollArea.setWidgetResizable(True)
-        self.scrollArea.setObjectName("scrollArea")
-        self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 679, 159))
-        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
-        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(520, 450, 211, 51))
+        self.renderButton = QtWidgets.QPushButton(self.centralwidget)
+        self.renderButton.setGeometry(QtCore.QRect(230, 380, 131, 41))
         font = QtGui.QFont()
         font.setFamily("Meiryo UI")
         font.setPointSize(12)
-        self.pushButton.setFont(font)
-        self.pushButton.setObjectName("pushButton")
+        self.renderButton.setFont(font)
+        self.renderButton.setObjectName("renderButton")
+        self.renderingArea = QtWidgets.QLabel(self.centralwidget)
+        self.renderingArea.setGeometry(QtCore.QRect(20, 200, 341, 161))
+        self.renderingArea.setText("")
+        self.renderingArea.setObjectName("renderingArea")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 794, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 403, 21))
         self.menubar.setObjectName("menubar")
+        self.menuFile = QtWidgets.QMenu(self.menubar)
+        self.menuFile.setObjectName("menuFile")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setEnabled(True)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+        self.actionOpen = QtWidgets.QAction(MainWindow)
+        self.actionOpen.setObjectName("actionOpen")
+        self.actionClose = QtWidgets.QAction(MainWindow)
+        self.actionClose.setObjectName("actionClose")
+        self.menuFile.addAction(self.actionOpen)
+        self.menuFile.addAction(self.actionClose)
+        self.menubar.addAction(self.menuFile.menuAction())
 
         self.retranslateUi(MainWindow)
+        self.renderButton.pressed.connect(MainWindow.show)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -53,10 +61,12 @@ class Ui_MainWindow(object):
         self.textEdit.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'Consolas\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS UI Gothic\'; font-size:11pt;\">E = mc^2</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS UI Gothic\'; font-size:11pt;\"><br /></p></body></html>"))
-        self.pushButton.setText(_translate("MainWindow", "Render"))
+"</style></head><body style=\" font-family:\'Meiryo UI\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.renderButton.setText(_translate("MainWindow", "Render"))
+        self.menuFile.setTitle(_translate("MainWindow", "File"))
+        self.actionOpen.setText(_translate("MainWindow", "Open"))
+        self.actionClose.setText(_translate("MainWindow", "Close"))
 
 
 if __name__ == "__main__":
