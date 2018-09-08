@@ -2,13 +2,25 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>403</width>
-    <height>480</height>
+    <height>390</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="acceptDrops">
+   <bool>true</bool>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
@@ -42,16 +54,16 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="renderButton">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>380</y>
-      <width>131</width>
-      <height>41</height>
+      <x>270</x>
+      <y>310</y>
+      <width>91</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Meiryo UI</family>
-      <pointsize>12</pointsize>
+      <pointsize>10</pointsize>
      </font>
     </property>
     <property name="text">
@@ -64,7 +76,7 @@ p, li { white-space: pre-wrap; }
       <x>20</x>
       <y>200</y>
       <width>341</width>
-      <height>161</height>
+      <height>81</height>
      </rect>
     </property>
     <property name="text">

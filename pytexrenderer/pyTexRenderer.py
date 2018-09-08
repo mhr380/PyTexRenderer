@@ -39,9 +39,24 @@ class RunGUI(QtWidgets.QMainWindow):
         # behaviors
         self.ui.renderButton.pressed.connect(self.renderButtonPressed)
 
+
+    def dragEnterEvent(self, event):
+        urls = event.mimeData().urls()
+        path = urls[0].toLocalFile()
+        if os.path.splitext(path)[1] == '.txt':
+            event.accept()
+        else:
+            event.ignore()
+
+    def dropEvent(self, event):
+        urls = event.mimeData().urls()
+        path = urls[0].toLocalFile()
+        with open(path, 'r') as f:
+            self.input_tex_string = f.read()
+        self.getAndShowEquationImage()
+
     def renderButtonPressed(self):
         self.setTmpstring()
-
         self.getAndShowEquationImage()
         self.saveTexStringToCache()
 
